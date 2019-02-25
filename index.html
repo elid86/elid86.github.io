@@ -1,0 +1,2322 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> /* set the CSS */
+
+body {
+    font: 12px "Times New Roman";
+    background-color: rgb(115, 149, 57);
+}
+
+/*----------- SELECTION AREA -----------*/
+
+.tabDiv {
+    margin-right: 500px;
+}
+
+.fixed1 {
+    position: fixed;
+    top: 70px;
+    right: 50px;
+    background-color: #daf19f;
+    width: 380px;
+    border-radius: 5px;
+}
+
+.fixed2 {
+    position: relative;
+    top: -50px;
+    right: -165px;
+}
+.fixed3 {
+    position: relative;
+    top: -20px;
+    left: 100px;
+}
+
+.fixed4 {
+    position: relative;
+    height: 200px;
+    width: 320px;
+    top: -300px;
+}
+.column1 {
+    position: relative;
+    width: 150px;
+    height: 270px;
+    left: 50px;
+    top: -35px;
+}
+.column2 {
+    position: relative;
+    width: 150px;
+    height: 270px;
+    top: -280px;
+    margin-left: 180px;
+}
+
+
+/*--------------- SLIDER ------------------*/
+.relativeSlider {
+    position: relative;
+    bottom: -37px;
+    left: -145px;
+}
+
+/*------------- UPDATE STYLE BUTTON -------------*/
+
+.updateButton {
+    position: relative;
+    left: 70px;
+    background-color: dodgerblue;
+    border: none;
+    width: 200px;
+    height: 30px;
+    font-color: white;
+    border-radius: 5px;
+}
+
+
+/*------------- ALL & CLEAR STYLE BUTTONS -------------*/
+
+.btn {
+    border: none;
+    background-color: inherit;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn:hover {
+    font-size: 14px;
+    font: bold;
+    padding: 3px;
+}
+
+.buttonStyle1{color: dodgerblue}
+
+/*------------- STYLE MAP ---------------*/
+
+.pathMap {
+    stroke: white;
+    fill: lightblue;
+    stroke-width: .5;
+}
+
+/*-------------STYLE GRAPHS -------------*/
+path {
+    stroke: #ff0000;
+    stroke-width: 1;
+    fill: none;
+}
+
+path2 {
+    stroke: black;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.area {
+    stroke-width: 0;
+}
+
+
+
+/* ------------- STYLE TAB ------------ */
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    background-color: inherit;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #daf19f;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    background-color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+</style>
+
+
+<!---------- Beginning of html and javascript ------------->
+
+<body>
+
+<h1 style="color: white;" align="center">Major Coffee Exports from 1965-2017</h1>
+
+<!-- load the d3.js library -->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<!-- TAB LINKS -->
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Compare')" id="defaultTab">Compare</button>
+    <button class="tablinks" onclick="openCity(event, 'Individual')">Individuals</button>
+</div>
+
+
+<!------- COMPARE GRAPH DIV ------->
+<div id="Compare" class="tabcontent" style="margin-right: 475px;">
+    <h1 align="center">Comparison of Countries</h1>
+    <p>* Coffee units measured <br>in thousand 60kg bags</p>
+</div>
+
+<!------ INDIVIDUAL GRAPH DIV ------->
+<div id="Individual" class="tabcontent" style="margin-right: 475px;">
+    <h1 align="center">Individual Countries</h1>
+    <p>* Coffee units measured <br>in thousand 60kg bags</p>
+</div>
+
+
+<!-- SET UP SELECTION DIV -->
+
+<div id="selectionZone" class="fixed1">
+    <div style="margin: 30px; width: 360px;">
+        <input type="button" value="Update" onclick="update()" class="updateButton">
+        <br>
+        <br>
+        <text style="font-size:125%;"><b>Coffee Range:  </b></text><text id="yMax">40,000</text>
+        <br>
+        <input type="range" min="0" max="40000" value="40000" class="slider" id="ySlider">
+        <br>
+        <div class="fixed2">
+            <text style="font-size:125%;"><b>Year Range: </b></text><text id="xMin">1965</text> - <text id="xMax">2017</text>
+            <input type="range" min="1965" max="2017" value="2017" class="relativeSlider" id="xSliderBottom" ><br>
+            <input type="range" min="1965" max="2017" value="1965" class="slider" id="xSliderTop">
+        </div>
+        <div class="fixed3">
+            <input type="checkbox" id="averageCheck"><b>Yearly Average</b>
+        </div>
+        <br>
+        <br>
+        <div class="column1">
+            <button class="btn buttonStyle1" onclick="selectAll()">Select All</button>
+            <button class="btn buttonStyle1" onclick="clearAll()">Clear All</button>
+            <br>
+            <input type="checkbox" id="brazilCheck">Brazil
+            <br>
+            <input type="checkbox" id="cameroonCheck">Cameroon
+            <br>
+            <input type="checkbox" id="cetedivoireCheck">Cete d'Ivoire
+            <br>
+            <input type="checkbox" id="colombiaCheck">Colombia
+            <br>
+            <input type="checkbox" id="costaRicaCheck">Costa Rica
+            <br>
+            <input type="checkbox" id="drCongoCheck">DR Congo
+            <br>
+            <input type="checkbox" id="ecuadorCheck">Ecuador
+            <br>
+            <input type="checkbox" id="elSalvadorCheck">El Salvador
+            <br>
+            <input type="checkbox" id="ethiopiaCheck">Ethiopia
+            <br>
+            <input type="checkbox" id="guatemalaCheck">Guatemala
+            <br>
+            <input type="checkbox" id="hondurasCheck">Honduras
+            <br>
+        </div>
+        <div class="column2">
+            <input type="checkbox" id="indiaCheck">India
+            <br>
+            <input type="checkbox" id="indonesiaCheck">Indonesia
+            <br>
+            <input type="checkbox" id="kenyaCheck">Kenya
+            <br>
+            <input type="checkbox" id="mexicoCheck">Mexico
+            <br>
+            <input type="checkbox" id="nicaraguaCheck">Nicaragua
+            <br>
+            <input type="checkbox" id="pnGuineaCheck">Papua New Guinea
+            <br>
+            <input type="checkbox" id="peruCheck">Peru
+            <br>
+            <input type="checkbox" id="tanzaniaCheck">Tanzania
+            <br>
+            <input type="checkbox" id="thailandCheck">Thailand
+            <br>
+            <input type="checkbox" id="ugandaCheck">Uganda
+            <br>
+            <input type="checkbox" id="vietnamCheck">Vietnam
+        </div>
+        <div id="mapSpace" class="fixed4"></div>
+    </div>
+</div>
+
+<!-- GRAPHS GENERAL DETAILS-->
+<script>
+
+    //-------- Set the dimensions of the canvas -----------//
+
+        // INDIVIDUAL
+    var margin = {top: 50, right: 20, bottom: 50, left: 50},
+        width = 740 - margin.left - margin.right,
+        height = 150 - margin.top - margin.bottom;
+
+        //COMPARE
+    var margin2 = {top: 50, right: 20, bottom: 50, left: 50},
+        width2 = 740 - margin2.left - margin2.right,
+        height2 = 500 - margin2.top - margin2.bottom;
+
+
+    //----------- Set the ranges -----------//
+        // INDVIDUAL
+    var x = d3.scale.linear().range([0,width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+        // COMPARE
+    var x2 = d3.scale.linear().range([0,width2]);
+    var y2 = d3.scale.linear().range([height2, 0]);
+
+
+    //----------- Define the axes -----------//
+        //INDVIDUAL
+    var xAxis = d3.svg.axis().scale(x)
+        .orient("bottom").ticks(10).tickFormat(d3.format("d"));
+    var yAxis = d3.svg.axis().scale(y)
+        .orient("left").ticks(3);
+
+        //COMPARE
+    var xAxis2 = d3.svg.axis().scale(x2)
+        .orient("bottom").ticks(10).tickFormat(d3.format("d"));
+    var yAxis2 = d3.svg.axis().scale(y2)
+        .orient("left").ticks(10);
+
+</script>
+
+
+<!---------- DEFINE DATA FOR EACH LINE --------->
+<script>
+    //---------- Define the lines - INDIVIDUAL ------------//
+    var brazilLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.brazil); });
+
+    var colombiaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.colombia); });
+
+    var cameroonLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.cameroon); });
+
+    var drCongoLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.drCongo); });
+
+    var costaRicaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.costaRica); });
+
+    var ceteDIvoireLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.ceteDIvoire); });
+
+    var ecuadorLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.ecuador); });
+
+    var elSalvadorLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.elSalvador); });
+
+    var ethiopiaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.ethiopia); });
+
+    var guatemalaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.guatemala); });
+
+    var hondurasLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.honduras); });
+
+    var indiaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.india); });
+
+    var indonesiaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.indonesia); });
+
+    var kenyaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.kenya); });
+
+    var mexicoLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.mexico); });
+
+    var nicaraguaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.nicaragua); });
+
+    var pNGuineaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.papuaNewGuinea); });
+
+    var peruLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.peru); });
+
+    var tanzaniaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.tanzania); });
+
+    var thailandLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.thailand); });
+
+    var ugandaLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.uganda); });
+
+    var vietnamLine = d3.svg.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.vietnam); });
+
+    //------------ Define the lines - COMPARE -----------//
+    var brazilLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.brazil); });
+
+    var colombiaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.colombia); });
+
+    var cameroonLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.cameroon); });
+
+    var drCongoLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.drCongo); });
+
+    var costaRicaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.costaRica); });
+
+    var ceteDIvoireLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.ceteDIvoire); });
+
+    var ecuadorLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.ecuador); });
+
+    var elSalvadorLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.elSalvador); });
+
+    var ethiopiaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.ethiopia); });
+
+    var guatemalaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.guatemala); });
+
+    var hondurasLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.honduras); });
+
+    var indiaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.india); });
+
+    var indonesiaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.indonesia); });
+
+    var kenyaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.kenya); });
+
+    var mexicoLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.mexico); });
+
+    var nicaraguaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.nicaragua); });
+
+    var pNGuineaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.papuaNewGuinea); });
+
+    var peruLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.peru); });
+
+    var tanzaniaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.tanzania); });
+
+    var thailandLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.thailand); });
+
+    var ugandaLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.uganda); });
+
+    var vietnamLine2 = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.vietnam); });
+
+    var averageLine = d3.svg.line()
+        .x(function(d) { return x2(d.year); })
+        .y(function(d) { return y2(d.average); });
+
+
+    //------ Define area under lines ------------//
+
+    var areaBrazil = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.brazil); });
+
+    var areaColombia = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.colombia); });
+
+    var areaCameroon = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.cameroon); });
+
+    var areadrCongo = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.drCongo); });
+
+    var areaCostaRica = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.costaRica); });
+
+    var areaCeteDIvoire = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.ceteDIvoire); });
+
+    var areaEcuador = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.ecuador); });
+
+    var areaElSalvador = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.elSalvador); });
+
+    var areaEthiopia = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.ethiopia); });
+
+    var areaGuatemala = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.guatemala); });
+
+    var areaHonduras = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.honduras); });
+
+    var areaIndia = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.india); });
+
+    var areaIndonesia = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.indonesia); });
+
+    var areaKenya = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.kenya); });
+
+    var areaMexico = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.mexico); });
+
+    var areaNicaragua = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.nicaragua); });
+
+    var areaPNGuinea = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.papuaNewGuinea); });
+
+    var areaPeru = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.peru); });
+
+    var areaTanzania = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.tanzania); });
+
+    var areaThailand = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.thailand); });
+
+    var areaUganda = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.uganda); });
+
+    var areaVietnam = d3.svg.area()
+        .x(function(d) { return x(d.year); })
+        .y0(height)
+        .y1(function(d) { return y(d.vietnam); });
+
+
+
+</script>
+
+<!------------- CREATE COMPARE GRAPH ------------>
+<script>
+
+    function graphAll() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.colombia = +d['Colombia'];
+                d.cameroon = +d['Cameroon'];
+                d.drCongo = +d['DR Congo'];
+                d.costaRica = +d['Costa Rica'];
+                d.ceteDIvoire = +d['Cete d\'Ivoire'];
+                d.ecuador = +d['Ecuador'];
+                d.elSalvador = +d['El Salvador'];
+                d.ethiopia = +d['Ethiopia'];
+                d.guatemala = +d['Guatemala'];
+                d.honduras = +d['Honduras'];
+                d.india = +d['India'];
+                d.indonesia = +d['Indonesia'];
+                d.kenya = +d['Kenya'];
+                d.mexico = +d['Mexico'];
+                d.nicaragua = +d['Nicaragua'];
+                d.papuaNewGuinea = +d['Papua New Guinea'];
+                d.peru = +d['Peru'];
+                d.tanzania = +d['Tanzania'];
+                d.thailand = +d['Thailand'];
+                d.uganda = +d['Uganda'];
+                d.vietnam = +d['Vietnam'];
+                d.average = +d['Average'];
+            });
+
+            var svgAll = d3.select("#Compare")
+                .append("svg")
+                .attr("width", width2 + margin2.left + margin2.right)
+                .attr("height", height2 + margin2.top + margin2.bottom )
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin2.left + "," + margin2.top + ")");
+
+            //------Scale the range of the data--------//
+
+            var ySlider = document.getElementById("ySlider");
+            var xSliderTop = document.getElementById("xSliderTop");
+            var xSliderBottom = document.getElementById("xSliderBottom");
+
+            var xSliderVals = [xSliderTop.value, xSliderBottom.value];
+
+            var xMin = document.getElementById("xMin");
+
+            x2.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
+            y2.domain([0, ySlider.value]);
+
+            //----- ToolTip Box ---------//
+
+            var div = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            //----- Add the lines path. -------//
+
+                // Brazil
+            if(d3.select("#brazilCheck").property("checked")){
+                svgAll.append("path").attr("class", "line").attr("d", brazilLine2(data)).attr("id","Brazil")}
+
+                //Cameroon
+            if(d3.select("#cameroonCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", cameroonLine2(data)).attr("id","Cameroon")
+                .style("stroke", "Crimson");}
+
+                //Cete d'Ivoire
+            if(d3.select("#cetedivoireCheck").property("checked")){
+                svgAll.append("path").attr("class", "line").attr("d", ceteDIvoireLine2(data)).attr("id","Cete d'Ivoire")
+                    .style("stroke", "DarkRed");}
+
+            //Colombia
+            if(d3.select("#colombiaCheck").property("checked")){
+                svgAll.append("path").attr("class", "line").attr("d", colombiaLine2(data)).attr("id","Colombia")
+                    .style("stroke", "Coral"); }
+
+                //Costa Rica
+            if(d3.select("#costaRicaCheck").property("checked")){
+                svgAll.append("path").attr("class", "line").attr("d", costaRicaLine2(data)).attr("id","Costa Rica")
+                    .style("stroke", "Orange");}
+
+             //DR Congo
+            if(d3.select("#drCongoCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", drCongoLine2(data)).attr("id","DR Congo")
+                .style("stroke", "DarkOrange");}
+
+
+                //Ecuador
+            if(d3.select("#ecuadorCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", ecuadorLine2(data)).attr("id","Ecuador")
+                .style("stroke", "Gold");}
+
+                //El Salvador
+            if(d3.select("#elSalvadorCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", elSalvadorLine2(data)).attr("id","El Salvador")
+                .style("stroke", d3.rgb(230, 230, 0));}
+
+                //Ethiopia
+            if(d3.select("#ethiopiaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", ethiopiaLine2(data)).attr("id","Ethiopia")
+                .style("stroke", "GreenYellow");}
+
+                //Guatemala
+            if(d3.select("#guatemalaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", guatemalaLine2(data)).attr("id","Guatemala")
+                .style("stroke", "LimeGreen");}
+
+                //Honduras
+            if(d3.select("#hondurasCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", hondurasLine2(data)).attr("id","Honduras")
+                .style("stroke", "Green");}
+
+                //India
+            if(d3.select("#indiaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", indiaLine2(data)).attr("id","India")
+                .style("stroke", "MediumAquaMarine");}
+
+                //Indonesia
+            if(d3.select("#indonesiaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", indonesiaLine2(data)).attr("id","Indonesia")
+                .style("stroke", "SkyBlue");}
+
+                //Kenya
+            if(d3.select("#kenyaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", kenyaLine2(data)).attr("id","Kenya")
+                .style("stroke", "RoyalBlue");}
+
+                //Mexico
+            if(d3.select("#mexicoCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", mexicoLine2(data)).attr("id","Mexico")
+                .style("stroke", "Navy");}
+
+                //Nicaragua
+            if(d3.select("#nicaraguaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", nicaraguaLine2(data)).attr("id","Nicaragua")
+                .style("stroke", "MediumSlateBlue");}
+
+                //Papua New Guinea
+            if(d3.select("#pnGuineaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", pNGuineaLine2(data)).attr("id","Papua New Guinea")
+                .style("stroke", "MediumPurple");}
+
+                //Peru
+            if(d3.select("#peruCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", peruLine2(data)).attr("id","Peru")
+                .style("stroke", "MediumOrchid");}
+
+                //Tanzania
+            if(d3.select("#tanzaniaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", tanzaniaLine2(data)).attr("id","Tanzania")
+                .style("stroke", "Magenta");}
+
+                //Thailand
+            if(d3.select("#thailandCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", thailandLine2(data)).attr("id","Thailand")
+                .style("stroke", "HotPink");}
+
+                //Uganda
+            if(d3.select("#ugandaCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", ugandaLine2(data)).attr("id","Uganda")
+                .style("stroke", "LightPink");}
+
+                //Vietnam
+            if(d3.select("#vietnamCheck").property("checked")){
+            svgAll.append("path").attr("class", "line").attr("d", vietnamLine2(data)).attr("id","Vietnam")
+                .style("stroke", "SaddleBrown");}
+
+                //Average
+            if(d3.select("#averageCheck").property("checked")){
+                svgAll.append("path").attr("class", "line").attr("id","Yearly Average").attr("d", averageLine(data)).style("stroke", "black").style("stroke-width",2);}
+
+
+            //------- Add Buffer White Space -------//
+            svgAll.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 500)
+                .style("fill","white");
+
+            svgAll.append("rect")
+                .attr("x", 0)
+                .attr("y", -50)
+                .attr("width", width2)
+                .attr("height", 50)
+                .style("fill","white");
+
+
+            //------- Add the X Axis ----------//
+            svgAll.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height2 + ")")
+                .call(xAxis2);
+
+            //------- Add the Y Axis ----------//
+            svgAll.append("svg:g")
+                .attr("class", "y axis")
+                .call(yAxis2);
+
+
+            //---------- Mouseover effect ---------//
+
+            svgAll.selectAll(".line")
+                .on("mouseover", function () {
+                    console.log("mouseover");
+                    d3.select(this).style("stroke-width", 4);
+                    svgAll.append("text")
+                        .attr("id","pathLabel")
+                        .attr("x", (width / 2) + 180)
+                        .attr("y", 0 - (margin.top / 2) )
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "20px")
+                        .text(d3.select(this).attr("id"));
+                    svgAll.selectAll(".line").style("opacity", .2);
+                    d3.select(this).style("opacity", 1);
+                })
+                .on("mouseout", function () {
+                    d3.select(this).style("stroke-width", 1);
+                    if(d3.select(this).attr("id") == "Yearly Average"){
+                        d3.select(this).style("stroke-width", 2);
+                    }
+                    svgAll.selectAll("path").style("opacity", 1);
+                    svgAll.select("#pathLabel").remove();
+                });
+
+        });
+    };
+
+</script>
+
+<!-------- CREATE INDIVIDUAL GRAPHS -------------->
+<script>
+    function graphBrazil() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom )
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.brazil;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            // Brazil
+            svg.append("path").attr("class", "line").attr("d", brazilLine(data));
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaBrazil)
+                .style("fill","red");
+
+            //------- Add the X Axis ----------//
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Brazil");
+
+
+        });
+    };
+
+
+    function graphColombia() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.colombia = +d['Colombia'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.colombia;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Colombia
+            svg.append("path").attr("class", "line").attr("d", colombiaLine(data))
+                .style("stroke", "Coral");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaColombia)
+                .style("fill","Coral");
+
+            //------- Add the X Axis ----------//
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Colombia");
+        });
+    };
+
+
+    function graphCameroon() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.cameroon = +d['Cameroon'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.cameroon;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Cameroon
+            svg.append("path").attr("class", "line").attr("d", cameroonLine(data))
+                .style("stroke", "Crimson");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaCameroon)
+                .style("fill","Crimson");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Cameroon");
+
+        });
+    };
+
+
+    function graphDRCongo() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.drCongo = +d['DR Congo'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.drCongo;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //DR Congo
+            svg.append("path").attr("class", "line").attr("d", drCongoLine(data))
+                .style("stroke", "DarkOrange");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areadrCongo)
+                .style("fill","DarkOrange");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Democratic Republic of the Congo");
+
+        });
+    };
+
+
+    function graphCostaRica() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.costaRica = +d['Costa Rica'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.costaRica;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Costa Rica
+            svg.append("path").attr("class", "line").attr("d", costaRicaLine(data))
+                .style("stroke", "Orange");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaCostaRica)
+                .style("fill","Orange");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Costa Rica");
+
+        });
+    };
+
+
+    function graphCeteDIvoire() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.ceteDIvoire = +d['Cete d\'Ivoire'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.ceteDIvoire;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Cete d'Ivoire
+            svg.append("path").attr("class", "line").attr("d", ceteDIvoireLine(data))
+                .style("stroke", "DarkRed");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaCeteDIvoire)
+                .style("fill","DarkRed");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Cete d'Ivoire");
+
+        });
+    };
+
+
+    function graphEcuador() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.ecuador = +d['Ecuador'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.ecuador;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Ecuador
+            svg.append("path").attr("class", "line").attr("d", ecuadorLine(data))
+                .style("stroke", "Gold");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaEcuador)
+                .style("fill","Gold");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Ecuador");
+
+        });
+    };
+
+
+    function graphElSalvador() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.elSalvador = +d['El Salvador'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.elSalvador;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //El Salvador
+            svg.append("path").attr("class", "line").attr("d", elSalvadorLine(data))
+                .style("stroke", d3.rgb(230, 230, 0));
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaElSalvador)
+                .style("fill",d3.rgb(230, 230, 0));
+
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("El Salvador");
+
+        });
+    };
+
+
+    function graphEthiopia() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.ethiopia = +d['Ethiopia'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.ethiopia;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Ethiopia
+            svg.append("path").attr("class", "line").attr("d", ethiopiaLine(data))
+                .style("stroke", "GreenYellow");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaEthiopia)
+                .style("fill","GreenYellow");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Ethiopia");
+
+        });
+    };
+
+
+    function graphGuatemala() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.guatemala = +d['Guatemala'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.guatemala;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Guatemala
+            svg.append("path").attr("class", "line").attr("d", guatemalaLine(data))
+                .style("stroke", "LimeGreen");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaGuatemala)
+                .style("fill","LimeGreen");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Guatemala");
+
+        });
+    };
+
+
+    function graphHonduras() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.honduras = +d['Honduras'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.honduras;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Honduras
+            svg.append("path").attr("class", "line").attr("d", hondurasLine(data))
+                .style("stroke", "Green");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaHonduras)
+                .style("fill","Green");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Honduras");
+
+        });
+    };
+
+
+    function graphIndia() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.india = +d['India'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.india;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //India
+            svg.append("path").attr("class", "line").attr("d", indiaLine(data))
+                .style("stroke", "MediumAquaMarine");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaIndia)
+                .style("fill","MediumAquaMarine");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("India");
+
+        });
+    };
+
+
+    function graphIndonesia() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.indonesia = +d['Indonesia'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.indonesia;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Indonesia
+            svg.append("path").attr("class", "line").attr("d", indonesiaLine(data))
+                .style("stroke", "SkyBlue");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaIndonesia)
+                .style("fill","SkyBlue");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Indonesia");
+
+        });
+    };
+
+
+    function graphKenya() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.kenya = +d['Kenya'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.kenya;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Kenya
+            svg.append("path").attr("class", "line").attr("d", kenyaLine(data))
+                .style("stroke", "RoyalBlue");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaKenya)
+                .style("fill","RoyalBlue");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Kenya");
+
+        });
+    };
+
+
+    function graphMexico() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.mexico = +d['Mexico'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.mexico;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Mexico
+            svg.append("path").attr("class", "line").attr("d", mexicoLine(data))
+                .style("stroke", "Navy");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaMexico)
+                .style("fill","Navy");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Mexico");
+
+        });
+    };
+
+
+    function graphNicaragua() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.nicaragua = +d['Nicaragua'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.nicaragua;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Nicaragua
+            svg.append("path").attr("class", "line").attr("d", nicaraguaLine(data))
+                .style("stroke", "MediumSlateBlue");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaNicaragua)
+                .style("fill","MediumSlateBlue");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Nicaragua");
+        });
+    };
+
+
+    function graphPNGuinea() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.papuaNewGuinea = +d['Papua New Guinea'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.papuaNewGuinea;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Papua New Guinea
+            svg.append("path").attr("class", "line").attr("d", pNGuineaLine(data))
+                .style("stroke", "MediumPurple");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaPNGuinea)
+                .style("fill","MediumPurple");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Papua New Guinea");
+
+        });
+    };
+
+
+    function graphPeru() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.peru = +d['Peru'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.peru;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Peru
+            svg.append("path").attr("class", "line").attr("d", peruLine(data))
+                .style("stroke", "MediumOrchid");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaPeru)
+                .style("fill","MediumOrchid");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Peru");
+
+        });
+    };
+
+
+    function graphTanzania() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.tanzania = +d['Tanzania'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.tanzania;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Tanzania
+            svg.append("path").attr("class", "line").attr("d", tanzaniaLine(data))
+                .style("stroke", "Magenta");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaTanzania)
+                .style("fill","Magenta");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Tanzania");
+
+        });
+    };
+
+
+    function graphThailand() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.thailand = +d['Thailand'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.thailand;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Thailand
+            svg.append("path").attr("class", "line").attr("d", thailandLine(data))
+                .style("stroke", "HotPink");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaThailand)
+                .style("fill","HotPink");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Thailand");
+
+        });
+    };
+
+
+    function graphUganda() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.uganda = +d['Uganda'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.uganda;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Uganda
+            svg.append("path").attr("class", "line").attr("d", ugandaLine(data))
+                .style("stroke", "lightPink");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaUganda)
+                .style("fill","LightPink");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Uganda");
+
+        });
+    };
+
+
+    function graphVietnam() {
+        d3.csv("data.csv", function (error, data) {
+            data.forEach(function (d) {
+                d.year = +d.year;
+                d.brazil = +d['Brazil'];
+                d.vietnam = +d['Vietnam'];
+            });
+
+            var svg = d3.select("#Individual")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Scale the range of the data.csv
+            x.domain([d3.min(data, function (d) {
+                return d.year;
+            }), d3.max(data, function (d) {
+                return d.year;
+            })]);
+            y.domain([0, d3.max(data, function (d) {
+                return d.vietnam;
+            })]);
+
+            //----- Add the lines path. -------//
+
+            //Vietnam
+            svg.append("path").attr("class", "line").attr("d", vietnamLine(data))
+                .style("stroke", "SaddleBrown");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", areaVietnam)
+                .style("fill","SaddleBrown");
+
+            //------- Add the X Axis ----------//
+            svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+
+            //------- Add the Y Axis ----------//
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            //------- Add the title -----------//
+            svg.append("text").attr("x", (width / 2)).attr("y", 0 - (margin.top / 3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "bold")
+                .text("Vietnam");
+
+        });
+    };
+
+</script>
+
+<!----------- SET UP DEFAULT GRAPHS ----------->
+<script>
+    document.getElementById("brazilCheck").checked = true;
+    document.getElementById("colombiaCheck").checked = true;
+    document.getElementById("vietnamCheck").checked = true;
+    document.getElementById("cetedivoireCheck").checked = true;
+    document.getElementById("drCongoCheck").checked = true;
+    document.getElementById("guatemalaCheck").checked = true;
+
+    graphAll();
+    graphBrazil();
+    graphColombia();
+    graphDRCongo();
+    graphCeteDIvoire();
+    graphGuatemala();
+    graphVietnam();
+
+
+</script>
+
+<!--------------- SET UP MAP ------------------>
+<script>
+    var width3 = 300,
+        height3 = 200;
+
+    var projection = d3.geo.mercator()
+        .center([0, 5 ])
+        .scale(900)
+        .rotate([-180,0]);
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width3)
+        .attr("height", height3);
+
+    var path = d3.geo.path()
+        .projection(projection);
+
+    var g = svg.append("g");
+
+    // load and display the World
+    d3.json("json/world-110m2.json", function(error, topology) {
+        g.selectAll("path")
+            .data(topojson.object(topology, topology.objects.countries)
+                .geometries)
+            .enter()
+            .append("path")
+            .attr("d", path)
+    });
+
+</script>
+
+<!-------------- TAB FUNCTIONS ----------------->
+<script>
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Open COMPARE as default tab
+    document.getElementById("defaultTab").click();
+
+</script>
+
+<!-------- UPDATE AND SELECT ALL FUNCTIONS --------->
+<script>
+
+    function update() {
+        //--- only way I could find to remove ALL the charts
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+        d3.select("svg").remove();
+
+        graphAll();
+
+        //--- If checked, show indv graph ---//
+        if(d3.select("#brazilCheck").property("checked")){graphBrazil();}
+
+        if(d3.select("#cameroonCheck").property("checked")) {graphCameroon();}
+
+        if(d3.select("#cetedivoireCheck").property("checked")) {graphCeteDIvoire();}
+
+        if(d3.select("#colombiaCheck").property("checked")) {graphColombia();}
+
+        if(d3.select("#costaRicaCheck").property("checked")) {graphCostaRica();}
+
+        if(d3.select("#drCongoCheck").property("checked")) {graphDRCongo();}
+
+        if(d3.select("#ecuadorCheck").property("checked")) {graphEcuador();}
+
+        if(d3.select("#elSalvadorCheck").property("checked")) {graphElSalvador();}
+
+        if(d3.select("#ethiopiaCheck").property("checked")) {graphEthiopia();}
+
+        if(d3.select("#guatemalaCheck").property("checked")) {graphGuatemala();}
+
+        if(d3.select("#hondurasCheck").property("checked")) {graphHonduras();}
+
+        if(d3.select("#indiaCheck").property("checked")) {graphIndia();}
+
+        if(d3.select("#indonesiaCheck").property("checked")) {graphIndonesia();}
+
+        if(d3.select("#kenyaCheck").property("checked")) {graphKenya();}
+
+        if(d3.select("#mexicoCheck").property("checked")) {graphMexico();}
+
+        if(d3.select("#nicaraguaCheck").property("checked")) {graphNicaragua();}
+
+        if(d3.select("#pnGuineaCheck").property("checked")) {graphPNGuinea();}
+
+        if(d3.select("#peruCheck").property("checked")) {graphPeru();}
+
+        if(d3.select("#tanzaniaCheck").property("checked")) {graphTanzania();}
+
+        if(d3.select("#thailandCheck").property("checked")) {graphThailand();}
+
+        if(d3.select("#ugandaCheck").property("checked")) {graphUganda();}
+
+        if(d3.select("#vietnamCheck").property("checked")) {graphVietnam();}
+
+    }
+
+    function selectAll(){
+        document.getElementById("brazilCheck").checked = true;
+        document.getElementById("cameroonCheck").checked = true;
+        document.getElementById("colombiaCheck").checked = true;
+        document.getElementById("costaRicaCheck").checked = true;
+        document.getElementById("cetedivoireCheck").checked = true;
+        document.getElementById("drCongoCheck").checked = true;
+        document.getElementById("ecuadorCheck").checked = true;
+        document.getElementById("elSalvadorCheck").checked = true;
+        document.getElementById("ethiopiaCheck").checked = true;
+        document.getElementById("guatemalaCheck").checked = true;
+        document.getElementById("hondurasCheck").checked = true;
+        document.getElementById("indiaCheck").checked = true;
+        document.getElementById("indonesiaCheck").checked = true;
+        document.getElementById("kenyaCheck").checked = true;
+        document.getElementById("mexicoCheck").checked = true;
+        document.getElementById("nicaraguaCheck").checked = true;
+        document.getElementById("pnGuineaCheck").checked = true;
+        document.getElementById("peruCheck").checked = true;
+        document.getElementById("tanzaniaCheck").checked = true;
+        document.getElementById("thailandCheck").checked = true;
+        document.getElementById("ugandaCheck").checked = true;
+        document.getElementById("vietnamCheck").checked = true;
+    }
+
+    function clearAll(){
+        document.getElementById("brazilCheck").checked = false;
+        document.getElementById("cameroonCheck").checked = false;
+        document.getElementById("colombiaCheck").checked = false;
+        document.getElementById("costaRicaCheck").checked = false;
+        document.getElementById("cetedivoireCheck").checked = false;
+        document.getElementById("drCongoCheck").checked = false;
+        document.getElementById("ecuadorCheck").checked = false;
+        document.getElementById("elSalvadorCheck").checked = false;
+        document.getElementById("ethiopiaCheck").checked = false;
+        document.getElementById("guatemalaCheck").checked = false;
+        document.getElementById("hondurasCheck").checked = false;
+        document.getElementById("indiaCheck").checked = false;
+        document.getElementById("indonesiaCheck").checked = false;
+        document.getElementById("kenyaCheck").checked = false;
+        document.getElementById("mexicoCheck").checked = false;
+        document.getElementById("nicaraguaCheck").checked = false;
+        document.getElementById("pnGuineaCheck").checked = false;
+        document.getElementById("peruCheck").checked = false;
+        document.getElementById("tanzaniaCheck").checked = false;
+        document.getElementById("thailandCheck").checked = false;
+        document.getElementById("ugandaCheck").checked = false;
+        document.getElementById("vietnamCheck").checked = false;
+    }
+</script>
+
+<!------ COFFEE RANGE SLIDER FUNCTIONS ------------>
+
+<script>
+    var yslider = document.getElementById("ySlider");
+    var yMax = document.getElementById("yMax");
+
+    yslider.oninput = function(){
+        yMax.innerHTML = parseInt(this.value).toLocaleString();
+    }
+</script>
+
+<!----- YEAR RANGE SLIDER FUNCTIONS ------------>
+<script>
+    var xSliderTop = document.getElementById("xSliderTop");
+    var xSliderBottom = document.getElementById("xSliderBottom");
+    var xMax = document.getElementById("xMax");
+    var xMin = document.getElementById("xMin");
+
+    xSliderTop.oninput = function(){
+        if(xSliderBottom.value < xSliderTop.value){
+            xMax.innerHTML = xSliderTop.value;
+        }
+        else if(xSliderBottom.value > xSliderTop.value){
+            xMin.innerHTML = xSliderTop.value;
+        }
+    }
+
+    xSliderBottom.oninput = function(){
+        if(xSliderBottom.value > xSliderTop.value){
+            xMax.innerHTML = xSliderBottom.value;
+        }
+        else if(xSliderBottom.value < xSliderTop.value){
+            xMin.innerHTML = xSliderBottom.value;
+        }
+    }
+</script>
+</body>
