@@ -5,7 +5,7 @@ https://youtu.be/yHjgB7OyXYg
 Web Application Link:
 https://elid86.github.io/
 
-The purpose of this web application is to view and compare the amount of coffee exported from the top coffee export countries. Countries were determined based on which had exported at least 1,000 units in a year between 1990-2017. This came to be 22 countries in total. 
+The purpose of this web application is to view and compare the amount of coffee exported from the top coffee export countries. The data was generously donated by the International Coffee Organization and countries were determined based on which had exported at least 1,000 units in a year between 1990-2017. This came to be 22 countries in total. 
 There are two tabs to the website: the comparison tab, to allow users to compare each of the selected countries on one graph, and the individuals tab, to show the flow of each country better by placing it on a scale of its own range. 
 
 
