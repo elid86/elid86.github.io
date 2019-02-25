@@ -9,6 +9,8 @@ Some interesting things found:
 1. Most countries are under 5,000 units a year
 So many countries participate in coffee exports yet most don't produce more than 5,000 units a year. This may seem like a lot but in comparison to Brazil, Colombia and Vietnam's exports, this is quite small. 
 
+<img width="750" alt="screen shot 2019-02-25 at 12 07 11 am" src="https://user-images.githubusercontent.com/45048090/53317875-f945e980-3892-11e9-8ec1-b5c782ce72be.png">
+
 2. Vietnam's late start
 We are able to see that Vietnam didn't actually begin exporting coffee until the late 1980's, yet it only took around 20 years to become one of the top exporters. They even hit a high of over 25,000 units where most countries don't ever reach even 5,000 units. 
 
