@@ -872,14 +872,8 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
-            y.domain([0, d3.max(data, function (d) {
-                return d.brazil;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
+            y.domain([0, ySlider.value]);
 
             //----- Add the lines path. -------//
 
@@ -891,6 +885,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaBrazil)
                 .style("fill","red");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g")
@@ -932,11 +941,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.colombia;
             })]);
@@ -952,6 +957,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaColombia)
                 .style("fill","Coral");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g")
@@ -991,11 +1011,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.cameroon;
             })]);
@@ -1011,6 +1027,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaCameroon)
                 .style("fill","Crimson");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1046,11 +1077,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.drCongo;
             })]);
@@ -1066,6 +1093,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areadrCongo)
                 .style("fill","DarkOrange");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1101,11 +1143,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.costaRica;
             })]);
@@ -1121,6 +1159,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaCostaRica)
                 .style("fill","Orange");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1156,11 +1209,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.ceteDIvoire;
             })]);
@@ -1176,6 +1225,22 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaCeteDIvoire)
                 .style("fill","DarkRed");
+
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1211,11 +1276,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.ecuador;
             })]);
@@ -1231,6 +1292,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaEcuador)
                 .style("fill","Gold");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1266,11 +1342,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.elSalvador;
             })]);
@@ -1286,6 +1358,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaElSalvador)
                 .style("fill",d3.rgb(230, 230, 0));
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
 
             //------- Add the X Axis ----------//
@@ -1322,11 +1409,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.ethiopia;
             })]);
@@ -1342,6 +1425,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaEthiopia)
                 .style("fill","GreenYellow");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1377,11 +1475,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.guatemala;
             })]);
@@ -1397,6 +1491,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaGuatemala)
                 .style("fill","LimeGreen");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1432,11 +1541,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.honduras;
             })]);
@@ -1452,6 +1557,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaHonduras)
                 .style("fill","Green");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1487,11 +1607,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.india;
             })]);
@@ -1507,6 +1623,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaIndia)
                 .style("fill","MediumAquaMarine");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1542,11 +1673,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.indonesia;
             })]);
@@ -1562,6 +1689,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaIndonesia)
                 .style("fill","SkyBlue");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1597,11 +1739,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.kenya;
             })]);
@@ -1617,6 +1755,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaKenya)
                 .style("fill","RoyalBlue");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1652,11 +1805,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.mexico;
             })]);
@@ -1672,6 +1821,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaMexico)
                 .style("fill","Navy");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1707,11 +1871,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.nicaragua;
             })]);
@@ -1727,6 +1887,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaNicaragua)
                 .style("fill","MediumSlateBlue");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1761,11 +1936,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.papuaNewGuinea;
             })]);
@@ -1781,6 +1952,22 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaPNGuinea)
                 .style("fill","MediumPurple");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1816,11 +2003,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.peru;
             })]);
@@ -1836,6 +2019,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaPeru)
                 .style("fill","MediumOrchid");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1871,11 +2069,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.tanzania;
             })]);
@@ -1891,6 +2085,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaTanzania)
                 .style("fill","Magenta");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1926,11 +2135,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.thailand;
             })]);
@@ -1946,6 +2151,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaThailand)
                 .style("fill","HotPink");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -1981,11 +2201,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.uganda;
             })]);
@@ -2001,6 +2217,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaUganda)
                 .style("fill","LightPink");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
@@ -2036,11 +2267,7 @@ path2 {
                     "translate(" + margin.left + "," + margin.top + ")");
 
             // Scale the range of the data.csv
-            x.domain([d3.min(data, function (d) {
-                return d.year;
-            }), d3.max(data, function (d) {
-                return d.year;
-            })]);
+            x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
             y.domain([0, d3.max(data, function (d) {
                 return d.vietnam;
             })]);
@@ -2056,6 +2283,21 @@ path2 {
                 .attr("class", "area")
                 .attr("d", areaVietnam)
                 .style("fill","SaddleBrown");
+
+            //------- Add Buffer White Space -------//
+            svg.append("rect")
+                .attr("x", -50)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
+
+            svg.append("rect")
+                .attr("x", 670)
+                .attr("y", -50)
+                .attr("width", 50)
+                .attr("height", 120)
+                .style("fill","white");
 
             //------- Add the X Axis ----------//
             svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);

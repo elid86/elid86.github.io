@@ -14,29 +14,66 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="15">
-                <caret line="1" selection-start-line="1" selection-end-line="1" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="2321" column="2" selection-start-line="2321" selection-start-column="2" selection-end-line="2321" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/README.md">
+              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+                <state split_layout="SPLIT">
+                  <first_editor relative-caret-position="15">
+                    <caret line="1" selection-start-line="1" selection-end-line="1" />
+                  </first_editor>
+                  <second_editor />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="394">
+                  <caret line="2299" column="39" selection-start-line="2299" selection-start-column="39" selection-end-line="2299" selection-end-column="39" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2346">
+                  <caret line="943" column="71" selection-start-line="943" selection-start-column="71" selection-end-line="943" selection-end-column="71" />
+                  <caret line="1013" column="71" selection-start-line="1013" selection-start-column="71" selection-end-line="1013" selection-end-column="71" />
+                  <caret line="1079" column="71" selection-start-line="1079" selection-start-column="71" selection-end-line="1079" selection-end-column="71" />
+                  <caret line="1145" column="71" selection-start-line="1145" selection-start-column="71" selection-end-line="1145" selection-end-column="71" />
+                  <caret line="1211" column="71" selection-start-line="1211" selection-start-column="71" selection-end-line="1211" selection-end-column="71" />
+                  <caret line="1278" column="71" selection-start-line="1278" selection-start-column="71" selection-end-line="1278" selection-end-column="71" />
+                  <caret line="1344" column="71" selection-start-line="1344" selection-start-column="71" selection-end-line="1344" selection-end-column="71" />
+                  <caret line="1411" column="71" selection-start-line="1411" selection-start-column="71" selection-end-line="1411" selection-end-column="71" />
+                  <caret line="1477" column="71" selection-start-line="1477" selection-start-column="71" selection-end-line="1477" selection-end-column="71" />
+                  <caret line="1543" column="71" selection-start-line="1543" selection-start-column="71" selection-end-line="1543" selection-end-column="71" />
+                  <caret line="1609" column="71" selection-start-line="1609" selection-start-column="71" selection-end-line="1609" selection-end-column="71" />
+                  <caret line="1675" column="71" selection-start-line="1675" selection-start-column="71" selection-end-line="1675" selection-end-column="71" />
+                  <caret line="1741" column="71" selection-start-line="1741" selection-start-column="71" selection-end-line="1741" selection-end-column="71" />
+                  <caret line="1807" column="71" selection-start-line="1807" selection-start-column="71" selection-end-line="1807" selection-end-column="71" />
+                  <caret line="1873" column="71" selection-start-line="1873" selection-start-column="71" selection-end-line="1873" selection-end-column="71" />
+                  <caret line="1938" column="71" selection-start-line="1938" selection-start-column="71" selection-end-line="1938" selection-end-column="71" />
+                  <caret line="2005" column="71" selection-start-line="2005" selection-start-column="71" selection-end-line="2005" selection-end-column="71" />
+                  <caret line="2071" column="71" selection-start-line="2071" selection-start-column="71" selection-end-line="2071" selection-end-column="71" />
+                  <caret line="2137" column="71" selection-start-line="2137" selection-start-column="71" selection-end-line="2137" selection-end-column="71" />
+                  <caret line="2203" column="71" selection-start-line="2203" selection-start-column="71" selection-end-line="2203" selection-end-column="71" />
+                  <caret line="2269" column="71" selection-start-line="2269" selection-start-column="71" selection-end-line="2269" selection-end-column="71" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -100,12 +137,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551066037368</updated>
-      <workItem from="1551066042405" duration="852000" />
+      <workItem from="1551066042405" duration="1982000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="852000" />
+    <option name="totallyTimeSpent" value="1982000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -146,8 +183,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="2321" column="2" selection-start-line="2321" selection-start-column="2" selection-end-line="2321" selection-end-column="2" />
+        <state relative-caret-position="394">
+          <caret line="2299" column="39" selection-start-line="2299" selection-start-column="39" selection-end-line="2299" selection-end-column="39" />
         </state>
       </provider>
     </entry>
