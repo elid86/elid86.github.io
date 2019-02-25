@@ -1,8 +1,6 @@
 # elid86.github.io
-Please watch the following video for an overview of the web application.
-
-
-
+Please watch the following video for an overview of the web application: 
+https://youtu.be/yHjgB7OyXYg
 
 Web Application Link:
 https://elid86.github.io/
