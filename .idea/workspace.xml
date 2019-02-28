@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6094a867-435a-49e2-972b-c6439f8a70df" name="Default Changelist" comment="" />
+    <list default="true" id="6094a867-435a-49e2-972b-c6439f8a70df" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -14,8 +16,8 @@
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/README.md">
               <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
                 <state split_layout="SPLIT">
@@ -27,11 +29,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="394">
-                  <caret line="2299" column="39" selection-start-line="2299" selection-start-column="39" selection-end-line="2299" selection-end-column="39" />
+                <state relative-caret-position="240">
+                  <caret line="876" column="31" selection-start-line="876" selection-start-column="31" selection-end-line="876" selection-end-column="31" />
                 </state>
               </provider>
             </entry>
@@ -39,32 +41,32 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2346">
-                  <caret line="943" column="71" selection-start-line="943" selection-start-column="71" selection-end-line="943" selection-end-column="71" />
-                  <caret line="1013" column="71" selection-start-line="1013" selection-start-column="71" selection-end-line="1013" selection-end-column="71" />
-                  <caret line="1079" column="71" selection-start-line="1079" selection-start-column="71" selection-end-line="1079" selection-end-column="71" />
-                  <caret line="1145" column="71" selection-start-line="1145" selection-start-column="71" selection-end-line="1145" selection-end-column="71" />
-                  <caret line="1211" column="71" selection-start-line="1211" selection-start-column="71" selection-end-line="1211" selection-end-column="71" />
-                  <caret line="1278" column="71" selection-start-line="1278" selection-start-column="71" selection-end-line="1278" selection-end-column="71" />
-                  <caret line="1344" column="71" selection-start-line="1344" selection-start-column="71" selection-end-line="1344" selection-end-column="71" />
-                  <caret line="1411" column="71" selection-start-line="1411" selection-start-column="71" selection-end-line="1411" selection-end-column="71" />
-                  <caret line="1477" column="71" selection-start-line="1477" selection-start-column="71" selection-end-line="1477" selection-end-column="71" />
-                  <caret line="1543" column="71" selection-start-line="1543" selection-start-column="71" selection-end-line="1543" selection-end-column="71" />
-                  <caret line="1609" column="71" selection-start-line="1609" selection-start-column="71" selection-end-line="1609" selection-end-column="71" />
-                  <caret line="1675" column="71" selection-start-line="1675" selection-start-column="71" selection-end-line="1675" selection-end-column="71" />
-                  <caret line="1741" column="71" selection-start-line="1741" selection-start-column="71" selection-end-line="1741" selection-end-column="71" />
-                  <caret line="1807" column="71" selection-start-line="1807" selection-start-column="71" selection-end-line="1807" selection-end-column="71" />
-                  <caret line="1873" column="71" selection-start-line="1873" selection-start-column="71" selection-end-line="1873" selection-end-column="71" />
-                  <caret line="1938" column="71" selection-start-line="1938" selection-start-column="71" selection-end-line="1938" selection-end-column="71" />
-                  <caret line="2005" column="71" selection-start-line="2005" selection-start-column="71" selection-end-line="2005" selection-end-column="71" />
-                  <caret line="2071" column="71" selection-start-line="2071" selection-start-column="71" selection-end-line="2071" selection-end-column="71" />
-                  <caret line="2137" column="71" selection-start-line="2137" selection-start-column="71" selection-end-line="2137" selection-end-column="71" />
-                  <caret line="2203" column="71" selection-start-line="2203" selection-start-column="71" selection-end-line="2203" selection-end-column="71" />
-                  <caret line="2269" column="71" selection-start-line="2269" selection-start-column="71" selection-end-line="2269" selection-end-column="71" />
+                <state relative-caret-position="581">
+                  <caret line="944" column="71" selection-start-line="944" selection-start-column="71" selection-end-line="944" selection-end-column="71" />
+                  <caret line="1014" column="71" selection-start-line="1014" selection-start-column="71" selection-end-line="1014" selection-end-column="71" />
+                  <caret line="1080" column="71" selection-start-line="1080" selection-start-column="71" selection-end-line="1080" selection-end-column="71" />
+                  <caret line="1146" column="71" selection-start-line="1146" selection-start-column="71" selection-end-line="1146" selection-end-column="71" />
+                  <caret line="1212" column="71" selection-start-line="1212" selection-start-column="71" selection-end-line="1212" selection-end-column="71" />
+                  <caret line="1279" column="71" selection-start-line="1279" selection-start-column="71" selection-end-line="1279" selection-end-column="71" />
+                  <caret line="1345" column="71" selection-start-line="1345" selection-start-column="71" selection-end-line="1345" selection-end-column="71" />
+                  <caret line="1412" column="71" selection-start-line="1412" selection-start-column="71" selection-end-line="1412" selection-end-column="71" />
+                  <caret line="1478" column="71" selection-start-line="1478" selection-start-column="71" selection-end-line="1478" selection-end-column="71" />
+                  <caret line="1544" column="71" selection-start-line="1544" selection-start-column="71" selection-end-line="1544" selection-end-column="71" />
+                  <caret line="1610" column="71" selection-start-line="1610" selection-start-column="71" selection-end-line="1610" selection-end-column="71" />
+                  <caret line="1676" column="71" selection-start-line="1676" selection-start-column="71" selection-end-line="1676" selection-end-column="71" />
+                  <caret line="1742" column="71" selection-start-line="1742" selection-start-column="71" selection-end-line="1742" selection-end-column="71" />
+                  <caret line="1808" column="71" selection-start-line="1808" selection-start-column="71" selection-end-line="1808" selection-end-column="71" />
+                  <caret line="1874" column="71" selection-start-line="1874" selection-start-column="71" selection-end-line="1874" selection-end-column="71" />
+                  <caret line="1939" column="71" selection-start-line="1939" selection-start-column="71" selection-end-line="1939" selection-end-column="71" />
+                  <caret line="2006" column="71" selection-start-line="2006" selection-start-column="71" selection-end-line="2006" selection-end-column="71" />
+                  <caret line="2072" column="71" selection-start-line="2072" selection-start-column="71" selection-end-line="2072" selection-end-column="71" />
+                  <caret line="2138" column="71" selection-start-line="2138" selection-start-column="71" selection-end-line="2138" selection-end-column="71" />
+                  <caret line="2204" column="71" selection-start-line="2204" selection-start-column="71" selection-end-line="2204" selection-end-column="71" />
+                  <caret line="2270" column="71" selection-start-line="2270" selection-start-column="71" selection-end-line="2270" selection-end-column="71" />
                 </state>
               </provider>
             </entry>
@@ -83,9 +85,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="764" />
+    <option name="width" value="1280" />
     <option name="height" value="773" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -136,23 +138,20 @@
       <option name="presentableId" value="Default" />
       <updated>1551066037368</updated>
       <workItem from="1551066042405" duration="2179000" />
+      <workItem from="1551389475720" duration="74000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2179000" />
+    <option name="totallyTimeSpent" value="2253000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14694202" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -160,6 +159,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -169,13 +172,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="2299" column="39" selection-start-line="2299" selection-start-column="39" selection-end-line="2299" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -183,6 +179,13 @@
             <caret line="1" selection-start-line="1" selection-end-line="1" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="876" column="31" selection-start-line="876" selection-start-column="31" selection-end-line="876" selection-end-column="31" />
         </state>
       </provider>
     </entry>

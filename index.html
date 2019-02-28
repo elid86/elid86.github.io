@@ -873,8 +873,9 @@ path2 {
 
             // Scale the range of the data.csv
             x.domain([Number(xMin.innerHTML), Number(xMax.innerHTML)]);
-            y.domain([0, ySlider.value]);
-
+            y.domain([0, d3.max(data, function (d) {
+                return d.brazil;
+            })]);
             //----- Add the lines path. -------//
 
             // Brazil
